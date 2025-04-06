@@ -2,8 +2,9 @@
 #include "tile_game.h"
 #include <stdlib.h>
 
-void enqueue(struct queue *q, struct game_state state, size_t value) 
+void enqueue(struct queue *q, struct game_state state) 
 {
+    size_t value = serialize(state);
     insert_at_tail(&(q -> data), value);
 }
 
@@ -27,8 +28,7 @@ int number_of_moves(struct game_state start)
     struct queue * queue = malloc(sizeof(struct queue));
 
     queue -> data.head = NULL;
-    size_t value = serialize(start);
-    enqueue(queue, start, value);
+    enqueue(queue, start);
     while ((queue) -> data.head != NULL)
     {
         struct game_state state = dequeue(queue);
@@ -71,10 +71,10 @@ int number_of_moves(struct game_state start)
         struct list_node * curr = queue -> data.head;
         if (curr == NULL)
         {
-            enqueue(queue, state_up, serial_up);
-            enqueue(queue, state_left, serial_left);
-            enqueue(queue, state_down, serial_down);
-            enqueue(queue, state_right, serial_right);
+            enqueue(queue, state_up);
+            enqueue(queue, state_left);
+            enqueue(queue, state_down);
+            enqueue(queue, state_right);
         }
         else
         {
@@ -103,19 +103,19 @@ int number_of_moves(struct game_state start)
             }
             if (check1 == 0)
             {
-                enqueue(queue, state_up, serial_up);
+                enqueue(queue, state_up);
             }
             if (check2 == 0)
             {
-                enqueue(queue, state_left, serial_left);
+                enqueue(queue, state_left);
             }
             if (check3 == 0)
             {
-                enqueue(queue, state_down, serial_down);
+                enqueue(queue, state_down);
             }
             if (check4 == 0)
             {
-                enqueue(queue, state_right, serial_right);
+                enqueue(queue, state_right);
             }
         }
     }
