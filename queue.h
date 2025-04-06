@@ -8,7 +8,7 @@ struct queue {
   struct linked_list data;
 };
 
-void enqueue(struct queue *q, struct game_state state);
+void enqueue(struct queue *q, struct game_state state, size_t value);
 struct game_state dequeue(struct queue *q);
 
 int number_of_moves(struct game_state start);
