@@ -46,6 +46,8 @@ int number_of_moves(struct game_state start)
         }
         if (equal == 1)
         {
+            free_list(queue -> data);
+            free(queue);
             return state.num_steps;
         }
         struct game_state state_up = state;
